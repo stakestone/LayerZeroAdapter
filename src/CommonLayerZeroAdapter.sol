@@ -16,7 +16,7 @@ contract CommonLayerZeroAdapter is OFTAdapter, AccessControl {
     uint256 public cap;
     mapping(uint256 => uint256) public quota;
 
-    event capSet(uint256 beforeCap, uint256 afterCap);
+    event CapSet(uint256 beforeCap, uint256 afterCap);
 
     constructor(
         address _token,
@@ -26,11 +26,11 @@ contract CommonLayerZeroAdapter is OFTAdapter, AccessControl {
     ) OFTAdapter(_token, _lzEndpoint, _delegate) Ownable(_delegate) {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         cap = _cap;
-        emit capSet(0, _cap);
+        emit CapSet(0, _cap);
     }
 
     function setCap(uint256 _cap) external onlyRole(CAP_SETTER_ROLE) {
-        emit capSet(cap, _cap);
+        emit CapSet(cap, _cap);
         cap = _cap;
     }
 
